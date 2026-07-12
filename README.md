@@ -21,7 +21,7 @@ Sheetblix supports human review. It identifies possible issues without automatic
 
 ## Project Snapshot
 
-| Area | Summary |
+| Area | Details |
 |---|---|
 | Business Need | Make routine CSV data checks faster, more consistent, and easier for non-technical users to understand. |
 | Primary Challenge | Outdated records, missing values, and inconsistent category labels can remain hidden inside spreadsheets and quietly affect reporting. |
