@@ -79,14 +79,14 @@ Sheetblix was designed to:
 
 | Requirement Type | Requirement |
 |---|---|
-| **Business Requirement** | Reduce the time and effort required to perform routine data-quality checks on CSV files. |
-| **Stakeholder Requirement** | Present findings clearly enough for volunteers, staff, researchers, and non-technical users to understand and act on. |
-| **Functional Requirement** | Analyze CSV files for structure, date freshness, stale records, categorical values, missing entries, and possible formatting inconsistencies. |
-| **Usability Requirement** | Provide both a visual browser application and a Python command-line interface. |
-| **Non-Functional Requirement** | Run with Python 3.8 or newer without requiring third-party Python packages. |
-| **Privacy Requirement** | Process browser-selected files locally without intentionally uploading them to an external server. |
-| **Transparency Requirement** | Explain what was found without silently changing the original file. |
-| **Human-Review Requirement** | Leave corrections and final data-quality decisions to the user. |
+| Business Requirement | Reduce the time and effort required to perform routine data-quality checks on CSV files. |
+| Stakeholder Requirement | Present findings clearly enough for volunteers, staff, researchers, and non-technical users to understand and act on. |
+| Functional Requirement | Analyze CSV files for structure, date freshness, stale records, categorical values, missing entries, and possible formatting inconsistencies. |
+| Usability Requirement | Provide both a visual browser application and a Python command-line interface. |
+| Non-Functional Requirement | Run with Python 3.8 or newer without requiring third-party Python packages. |
+| Privacy Requirement | Process browser-selected files locally without intentionally uploading them to an external server. |
+| Transparency Requirement | Explain what was found without silently changing the original file. |
+| Human-Review Requirement | Leave corrections and final data-quality decisions to the user. |
 
 ---
 
@@ -94,24 +94,24 @@ Sheetblix was designed to:
 
 | ID | Requirement | Expected Behaviour |
 |---|---|---|
-| **FR-01** | Accept CSV input | The user can select a CSV in the browser or provide a CSV filepath through the command line. |
-| **FR-02** | Display file details | Sheetblix shows the file name, number of data rows, and number of columns. |
-| **FR-03** | Inspect column contents | The populated values in each column are examined. |
-| **FR-04** | Classify columns | Columns are classified as date, number, category, text, or empty. |
-| **FR-05** | Detect date columns | Columns containing mostly recognizable date values are selected for freshness analysis. |
-| **FR-06** | Calculate overall freshness | The most recent valid date across the detected date columns is used to determine the overall freshness status. |
-| **FR-07** | Summarize date columns | Sheetblix displays the oldest date, newest date, days since the newest date, and freshness status for each detected date column. |
-| **FR-08** | Count stale rows | The number and percentage of rows older than the stale-data threshold are displayed. |
-| **FR-09** | Detect categorical columns | Columns containing a relatively small set of repeated values are treated as categorical. |
-| **FR-10** | Create categorical glossaries | Each detected categorical column is summarized using its distinct values, counts, percentages, and visual frequency bars. |
-| **FR-11** | Report missing values | Blank entries are counted and displayed as a number and percentage. |
-| **FR-12** | Identify possible variations | Values that differ only by capitalization or surrounding spaces can be surfaced for human review. |
-| **FR-13** | Support focused reports | Command-line users can request only the freshness analysis or only the categorical glossary. |
-| **FR-14** | Support configurable thresholds | Command-line users can change fresh-day, stale-day, category, and reference-date settings. |
-| **FR-15** | Produce reusable outputs | Command-line reports can be displayed or saved as text, Markdown, or JSON. |
-| **FR-16** | Preserve the source file | Sheetblix analyzes the CSV without automatically modifying it. |
-| **FR-17** | Protect browser-file privacy | Browser analysis occurs locally on the user’s device. |
-| **FR-18** | Support repeated analysis | Users can select **Analyze another file** and review a different CSV. |
+| FR-01 | Accept CSV input | The user can select a CSV in the browser or provide a CSV filepath through the command line. |
+| FR-02 | Display file details | Sheetblix shows the file name, number of data rows, and number of columns. |
+| FR-03 | Inspect column contents | The populated values in each column are examined. |
+| FR-04 | Classify columns | Columns are classified as date, number, category, text, or empty. |
+| FR-05 | Detect date columns | Columns containing mostly recognizable date values are selected for freshness analysis. |
+| FR-06 | Calculate overall freshness | The most recent valid date across the detected date columns is used to determine the overall freshness status. |
+| FR-07 | Summarize date columns | Sheetblix displays the oldest date, newest date, days since the newest date, and freshness status for each detected date column. |
+| FR-08 | Count stale rows | The number and percentage of rows older than the stale-data threshold are displayed. |
+| FR-09 | Detect categorical columns | Columns containing a relatively small set of repeated values are treated as categorical. |
+| FR-10 | Create categorical glossaries | Each detected categorical column is summarized using its distinct values, counts, percentages, and visual frequency bars. |
+| FR-11 | Report missing values | Blank entries are counted and displayed as a number and percentage. |
+| FR-12 | Identify possible variations | Values that differ only by capitalization or surrounding spaces can be surfaced for human review. |
+| FR-13 | Support focused reports | Command-line users can request only the freshness analysis or only the categorical glossary. |
+| FR-14 | Support configurable thresholds | Command-line users can change fresh-day, stale-day, category, and reference-date settings. |
+| FR-15 | Produce reusable outputs | Command-line reports can be displayed or saved as text, Markdown, or JSON. |
+| FR-16 | Preserve the source file | Sheetblix analyzes the CSV without automatically modifying it. |
+| FR-17 | Protect browser-file privacy | Browser analysis occurs locally on the user’s device. |
+| FR-18 | Support repeated analysis | Users can select **Analyze another file** and review a different CSV. |
 
 ---
 
@@ -141,16 +141,16 @@ Automated findings identify possible issues. Users should confirm the context be
 
 | Step | User Action | System Response |
 |---|---|---|
-| **1. Prepare** | Save the spreadsheet-style data as a CSV file. | The file becomes compatible with Sheetblix. |
-| **2. Open** | Visit the browser application or open the command-line tool. | Sheetblix becomes ready to receive a CSV. |
-| **3. Select** | Choose a CSV in the browser or provide its filepath in the command line. | The file is read locally. |
-| **4. Summarize** | Begin the analysis. | Sheetblix displays the file name, row count, and column count. |
-| **5. Inspect Dates** | Review the overall freshness and date-column table. | The oldest date, newest date, days since, status, and stale-row results are displayed. |
-| **6. Inspect Categories** | Review the categorical glossary cards or report. | Values, counts, percentages, frequency bars, and missing entries are shown. |
-| **7. Review Findings** | Examine outdated records, missing values, and possible category variations. | Sheetblix provides evidence without changing the source file. |
-| **8. Decide** | Determine which records or values require correction, updating, removal, or standardization. | Final decisions remain with the user. |
-| **9. Export** | Select an output format when using the command-line version. | A text, Markdown, or JSON report is displayed or saved. |
-| **10. Recheck** | Analyze the corrected file again. | The same repeatable checks are applied to the updated CSV. |
+| 1. Prepare | Save the spreadsheet-style data as a CSV file. | The file becomes compatible with Sheetblix. |
+| 2. Open | Visit the browser application or open the command-line tool. | Sheetblix becomes ready to receive a CSV. |
+| 3. Select | Choose a CSV in the browser or provide its filepath in the command line. | The file is read locally. |
+| 4. Summarize | Begin the analysis. | Sheetblix displays the file name, row count, and column count. |
+| 5. Inspect Dates | Review the overall freshness and date-column table. | The oldest date, newest date, days since, status, and stale-row results are displayed. |
+| 6. Inspect Categories | Review the categorical glossary cards or report. | Values, counts, percentages, frequency bars, and missing entries are shown. |
+| 7. Review Findings | Examine outdated records, missing values, and possible category variations. | Sheetblix provides evidence without changing the source file. |
+| 8. Decide | Determine which records or values require correction, updating, removal, or standardization. | Final decisions remain with the user. |
+| 9. Export | Select an output format when using the command-line version. | A text, Markdown, or JSON report is displayed or saved. |
+| 10. Recheck | Analyze the corrected file again. | The same repeatable checks are applied to the updated CSV. |
 
 ---
 
@@ -299,17 +299,17 @@ Test outcomes depend on the supplied file and its formatting. Unusual dates, mal
 
 | Value | Outcome |
 |---|---|
-| **Efficiency** | Reduces the time spent manually inspecting CSV files. |
-| **Consistency** | Applies the same basic data-quality checks whenever a file is reviewed. |
-| **Visibility** | Makes outdated records, missing values, and category distributions easier to notice. |
-| **Clarity** | Presents file dimensions, counts, percentages, and statuses in an understandable format. |
-| **Reliability** | Helps users identify issues that may affect filters, summaries, charts, dashboards, and reports. |
-| **Accessibility** | Provides both browser-based and command-line ways to use the tool. |
-| **Privacy** | Keeps browser-selected files on the user’s device. |
-| **Transparency** | Reports findings without silently changing the original data. |
-| **Reusability** | Produces text, Markdown, and JSON reports that can support different workflows. |
-| **Maintainability** | Uses Python’s standard library without third-party package dependencies. |
-| **Human Oversight** | Leaves corrections and final data-quality decisions to the user. |
+| Efficiency | Reduces the time spent manually inspecting CSV files. |
+| Consistency | Applies the same basic data-quality checks whenever a file is reviewed. |
+| Visibility | Makes outdated records, missing values, and category distributions easier to notice. |
+| Clarity | Presents file dimensions, counts, percentages, and statuses in an understandable format. |
+| Reliability | Helps users identify issues that may affect filters, summaries, charts, dashboards, and reports. |
+| Accessibility | Provides both browser-based and command-line ways to use the tool. |
+| Privacy | Keeps browser-selected files on the user’s device. |
+| Transparency | Reports findings without silently changing the original data. |
+| Reusability | Produces text, Markdown, and JSON reports that can support different workflows. |
+| Maintainability | Uses Python’s standard library without third-party package dependencies. |
+| Human Oversight | Leaves corrections and final data-quality decisions to the user. |
 
 ---
 
