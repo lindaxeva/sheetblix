@@ -321,10 +321,4 @@ Python · HTML · CSS · JavaScript · CSV · JSON · Markdown · Git · GitHub 
 
 ## Privacy
 
-Sheetblix is designed to minimize unnecessary data exposure.
-
-The command-line version processes files locally on the user’s computer. The browser version reads and analyzes the selected CSV inside the browser, so the file remains on the user’s device and is not intentionally uploaded to an external server.
-
-Sheetblix does not automatically modify the original file.
-
 Users should avoid including confidential, restricted, or personally identifiable information in public sample files, screenshots, repositories, documentation, or shared reports.
