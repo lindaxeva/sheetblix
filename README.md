@@ -1,157 +1,330 @@
-# Sheetblix (Prototype)
+# Sheetblix
 
-Meet Sheetblix. You hand it your spreadsheet-style CSV file, and it answers two 
-questions you probably should be asking yourself:
+Sheetblix turns a spreadsheet-style CSV file into a clear data-quality snapshot. It shows whether the data is current, what values appear in repeated-category columns, how frequently those values occur, and where missing or inconsistently entered information may require review.
 
-1. **Is this data still fresh, or has it gone off?**
-2. **What is actually in each column, and is anything secretly typed five
-   different ways?**
+Sheetblix was developed for the **GLOCAL Foundation of Canada** to help volunteers, staff, researchers, and non-technical users reduce repetitive spreadsheet checks and identify outdated, missing, or inconsistently entered data before it affects summaries, dashboards, reports, or administrative work.
 
-The best part: Sheetblix only uses tools that already come with Python, so
-there is nothing to install. If you have Python 3.8 or newer, you are good to
-go. 
+Sheetblix supports human review. It identifies possible issues without automatically changing the original CSV file.
 
-And if the command line makes you nervous, relax, there is a web version
-that runs right in your browser. Want to just try it today? 
+---
 
-<p align="center">
-  <a href="https://lindaxeva.github.io/sheetblix/">
-    <img src="https://img.shields.io/badge/Try%20the%20live%20demo%20now-6d28d9?style=for-the-badge" alt="Try the live demo now">
-  </a>
-</p>
+## Live Demos
 
-## Why you might want this
+| Demo | Main Capabilities | Access |
+|---|---|---|
+| Browser Application | Upload a CSV and view the file dimensions, overall freshness, date-column analysis, stale-row counts, categorical glossaries, missing values, frequencies, and percentages. | [Open Sheetblix](https://lindaxeva.github.io/sheetblix/) |
+| Python Command-Line Tool | Analyze CSV files locally, customize freshness thresholds, generate focused reports, and export results as text, Markdown, or JSON. | [View the Repository](https://github.com/lindaxeva/sheetblix) |
 
-Maybe your date column has entries that have not been updated in months, but nothing on the screen makes that obvious.
+---
 
-Maybe your category column has values like “Active,” “active,” and “ACTIVE.” To you, they might mean the same thing. To a spreadsheet, they are three different categories.
+## Project Snapshot
 
-That means your counts, summaries, and reports can quietly become unreliable.
+| Area | Summary |
+|---|---|
+| Business Need | Make routine CSV data checks faster, more consistent, and easier for non-technical users to understand. |
+| Primary Challenge | Outdated records, missing values, and inconsistent category labels can remain hidden inside spreadsheets and quietly affect reporting. |
+| Primary Users | Volunteers, administrative staff, researchers, students, and other users working with spreadsheet-style data. |
+| Organization | GLOCAL Foundation of Canada |
+| Solution Lead & Developer | Linda Eva Seuna |
+| Current Stage | Functional prototype |
+| Input | Spreadsheet-style CSV files |
+| Browser Output | File summary, overall freshness, date-column details, stale-row counts, categorical glossary cards, missing-value information, counts, percentages, and visual frequency bars |
+| Command-Line Output | Text, Markdown, or JSON data-quality reports |
+| In Scope | CSV analysis; row and column counts; date detection; freshness summaries; stale-row reporting; categorical glossaries; missing-value reporting; capitalization and spacing checks; browser-based local processing; configurable command-line reports |
+| Out of Scope | Direct Excel or Google Sheets analysis; automatic factual verification; automatic correction of source data; advanced typo detection; semantic matching; database storage; user accounts; multi-user collaboration; formal approval workflows |
 
-Sheetblix helps you catch those issues faster. It checks your CSV, shows what data may be out of date, and flags categories that look like the same value written in different ways.
+---
 
-Once the issues are visible, you can self-review them and decide the right next step, whether that means updating old records, removing outdated rows, or standardizing repeated category labels into one clean version.
+## Current State and Future State
 
-## Getting started
+| Current State Challenge | Future State With Sheetblix |
+|---|---|
+| Users manually count rows and inspect spreadsheet columns. | File dimensions are displayed automatically. |
+| Date columns must be reviewed row by row to determine whether data is current. | Sheetblix summarizes the oldest date, newest date, days since the newest date, and overall freshness. |
+| Individual outdated records can be difficult to identify. | Stale rows are counted and displayed as a number and percentage. |
+| Users may not immediately understand what values exist in a column. | Categorical glossary cards show the values contained in repeated-category columns. |
+| Category distributions must be calculated manually. | Counts, percentages, and visual frequency bars are generated automatically. |
+| Blank cells may remain unnoticed. | Missing values and their percentages are clearly reported. |
+| Values such as `Active`, `active`, and ` ACTIVE ` may be counted separately. | Possible capitalization and surrounding-space variations can be identified for review. |
+| Spreadsheet checks may be performed differently by different people. | The same repeatable checks can be applied whenever a CSV is reviewed. |
+| Command-line tools may be difficult for non-technical users. | A browser version provides a simple visual interface. |
+| Package installation can prevent users from running small automation tools. | The Python version uses only the standard library and requires no external packages. |
+| Users may be concerned about uploading operational data. | The browser version analyzes files locally on the user’s device. |
 
-There is nothing to install. Copy the project to your
-computer and run it:
+---
+
+## Project Objectives
+
+Sheetblix was designed to:
+
+- Reduce repetitive manual CSV inspection.
+- Provide an immediate summary of a file’s rows and columns.
+- Identify recognizable date columns.
+- Show the oldest and newest valid dates in each detected date column.
+- Determine whether the newest data is fresh, aging, or old.
+- Count rows that exceed the stale-data threshold.
+- Create a readable glossary of categorical values.
+- Display category counts and percentages.
+- Make missing categorical values easier to notice.
+- Surface possible capitalization and spacing inconsistencies.
+- Present findings in a format that non-technical users can understand.
+- Preserve the original CSV file.
+- Support human review rather than automatic correction.
+- Produce reusable text, Markdown, and JSON reports.
+- Keep browser-based analysis on the user’s device.
+
+---
+
+## Key Requirements
+
+| Requirement Type | Requirement |
+|---|---|
+| **Business Requirement** | Reduce the time and effort required to perform routine data-quality checks on CSV files. |
+| **Stakeholder Requirement** | Present findings clearly enough for volunteers, staff, researchers, and non-technical users to understand and act on. |
+| **Functional Requirement** | Analyze CSV files for structure, date freshness, stale records, categorical values, missing entries, and possible formatting inconsistencies. |
+| **Usability Requirement** | Provide both a visual browser application and a Python command-line interface. |
+| **Non-Functional Requirement** | Run with Python 3.8 or newer without requiring third-party Python packages. |
+| **Privacy Requirement** | Process browser-selected files locally without intentionally uploading them to an external server. |
+| **Transparency Requirement** | Explain what was found without silently changing the original file. |
+| **Human-Review Requirement** | Leave corrections and final data-quality decisions to the user. |
+
+---
+
+## Core Functional Requirements
+
+| ID | Requirement | Expected Behaviour |
+|---|---|---|
+| **FR-01** | Accept CSV input | The user can select a CSV in the browser or provide a CSV filepath through the command line. |
+| **FR-02** | Display file details | Sheetblix shows the file name, number of data rows, and number of columns. |
+| **FR-03** | Inspect column contents | The populated values in each column are examined. |
+| **FR-04** | Classify columns | Columns are classified as date, number, category, text, or empty. |
+| **FR-05** | Detect date columns | Columns containing mostly recognizable date values are selected for freshness analysis. |
+| **FR-06** | Calculate overall freshness | The most recent valid date across the detected date columns is used to determine the overall freshness status. |
+| **FR-07** | Summarize date columns | Sheetblix displays the oldest date, newest date, days since the newest date, and freshness status for each detected date column. |
+| **FR-08** | Count stale rows | The number and percentage of rows older than the stale-data threshold are displayed. |
+| **FR-09** | Detect categorical columns | Columns containing a relatively small set of repeated values are treated as categorical. |
+| **FR-10** | Create categorical glossaries | Each detected categorical column is summarized using its distinct values, counts, percentages, and visual frequency bars. |
+| **FR-11** | Report missing values | Blank entries are counted and displayed as a number and percentage. |
+| **FR-12** | Identify possible variations | Values that differ only by capitalization or surrounding spaces can be surfaced for human review. |
+| **FR-13** | Support focused reports | Command-line users can request only the freshness analysis or only the categorical glossary. |
+| **FR-14** | Support configurable thresholds | Command-line users can change fresh-day, stale-day, category, and reference-date settings. |
+| **FR-15** | Produce reusable outputs | Command-line reports can be displayed or saved as text, Markdown, or JSON. |
+| **FR-16** | Preserve the source file | Sheetblix analyzes the CSV without automatically modifying it. |
+| **FR-17** | Protect browser-file privacy | Browser analysis occurs locally on the user’s device. |
+| **FR-18** | Support repeated analysis | Users can select **Analyze another file** and review a different CSV. |
+
+---
+
+## Business Rules
+
+| Rule | System Response |
+|---|---|
+| The input must be a readable CSV file. | Sheetblix attempts to read the file and reports an error when it cannot be processed. |
+| The first row of the CSV is treated as the column-header row. | Column names are used throughout the report. |
+| A column must contain mostly recognizable date values to be classified as a date column. | Unsupported or highly inconsistent date columns may be treated as text. |
+| Data no more than 30 days old is considered fresh by default. | The date column receives a **Fresh** status. |
+| Data between 31 and 90 days old is considered aging by default. | The date column receives an **Aging** status. |
+| Data more than 90 days old is considered stale or old by default. | The date column receives an **Old** status. |
+| Stale-row calculations use the selected reference date and stale-day threshold. | Sheetblix displays the stale-row count and percentage. |
+| A categorical column must remain within the configured distinct-value limit. | High-cardinality columns may be classified as text instead. |
+| Blank entries in categorical columns must be reported. | The missing count and percentage are displayed. |
+| Capitalization and surrounding spaces are ignored when comparing possible category variations. | Similar-looking values can be grouped or surfaced for review. |
+| Semantic meaning must not be assumed. | Sheetblix does not automatically treat `ON` and `Ontario` as the same value. |
+| The original CSV must remain unchanged. | Findings are reported without automatically correcting the source file. |
+| Final decisions must remain with the user. | Sheetblix supports review but does not replace human judgment. |
+
+Automated findings identify possible issues. Users should confirm the context before updating, deleting, combining, or standardizing records.
+
+---
+
+## Solution Workflow
+
+| Step | User Action | System Response |
+|---|---|---|
+| **1. Prepare** | Save the spreadsheet-style data as a CSV file. | The file becomes compatible with Sheetblix. |
+| **2. Open** | Visit the browser application or open the command-line tool. | Sheetblix becomes ready to receive a CSV. |
+| **3. Select** | Choose a CSV in the browser or provide its filepath in the command line. | The file is read locally. |
+| **4. Summarize** | Begin the analysis. | Sheetblix displays the file name, row count, and column count. |
+| **5. Inspect Dates** | Review the overall freshness and date-column table. | The oldest date, newest date, days since, status, and stale-row results are displayed. |
+| **6. Inspect Categories** | Review the categorical glossary cards or report. | Values, counts, percentages, frequency bars, and missing entries are shown. |
+| **7. Review Findings** | Examine outdated records, missing values, and possible category variations. | Sheetblix provides evidence without changing the source file. |
+| **8. Decide** | Determine which records or values require correction, updating, removal, or standardization. | Final decisions remain with the user. |
+| **9. Export** | Select an output format when using the command-line version. | A text, Markdown, or JSON report is displayed or saved. |
+| **10. Recheck** | Analyze the corrected file again. | The same repeatable checks are applied to the updated CSV. |
+
+---
+
+## Command-Line Usage
+
+The Python version requires Python 3.8 or newer and uses only built-in Python libraries.
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/lindaxeva/sheetblix.git
 cd sheetblix
+```
+
+Run the included sample file:
+
+```bash
 python3 sheetblix.py sample_data.csv
 ```
 
-The `sample_data.csv` that comes with the tool has a few old dates and a few
-mismatched spellings planted on purpose, like a tiny crime scene, so you can
-watch Sheetblix solve it on your very first run.
+On some Windows installations, use:
 
-## How to use it
+```bash
+python sheetblix.py sample_data.csv
+```
 
-The shape of every command is the same:
+The general command structure is:
 
 ```bash
 python3 sheetblix.py YOUR_FILE.csv [options]
 ```
 
-And here are the things you will actually reach for:
+### Complete report
 
 ```bash
-# The full report (freshness and categories)
 python3 sheetblix.py sample_data.csv
+```
 
-# Just the freshness check
+### Freshness analysis only
+
+```bash
 python3 sheetblix.py sample_data.csv --freshness-only
+```
 
-# Just the list of categories
+### Categorical glossary only
+
+```bash
 python3 sheetblix.py sample_data.csv --glossary-only
+```
 
-# Save it as a Markdown file you can share
+### Save a Markdown report
+
+```bash
 python3 sheetblix.py sample_data.csv --format markdown --output report.md
+```
 
-# Get it as JSON, if you want to feed it into something else
+### Produce JSON output
+
+```bash
 python3 sheetblix.py sample_data.csv --format json
+```
 
-# Count anything older than 60 days as old, measured from a set date
+### Use a custom stale threshold and reference date
+
+```bash
 python3 sheetblix.py sample_data.csv --stale-days 60 --today 2026-06-26
 ```
 
-## The options, if you want to tweak things
+### Command Options
 
-| Option | What it does | Default |
-| --- | --- | --- |
-| `--format` | Pick the output style: `text`, `markdown`, or `json` | `text` |
-| `--output` | Save the report to a file instead of showing it on screen | screen |
-| `--freshness-only` | Show only the freshness check | off |
-| `--glossary-only` | Show only the list of categories | off |
-| `--max-categories` | How many different values a column can have and still count as a category | 20 |
-| `--top` | How many of the most common values to show per column | 10 |
-| `--fresh-days` | Data newer than this many days counts as fresh | 30 |
-| `--stale-days` | Data older than this many days counts as old | 90 |
-| `--today` | The date to measure freshness from (defaults to today) | today |
+| Option | What It Does | Default |
+|---|---|---|
+| `--format` | Selects `text`, `markdown`, or `json` output. | `text` |
+| `--output` | Saves the report to a file instead of displaying it on screen. | Screen |
+| `--freshness-only` | Displays only the freshness analysis. | Off |
+| `--glossary-only` | Displays only the categorical glossary. | Off |
+| `--max-categories` | Sets the maximum number of distinct values allowed for a categorical column. | `20` |
+| `--top` | Sets the maximum number of common values shown for each categorical column. | `10` |
+| `--fresh-days` | Sets the maximum age for data to be considered fresh. | `30` |
+| `--stale-days` | Sets the age after which data is considered old. | `90` |
+| `--today` | Sets the reference date used for freshness calculations. | Current date |
 
-## What it is doing behind the scenes
+---
 
-First, Sheetblix takes a look at each column and figures out what kind of value
-it holds:
+## Testing and Acceptance
 
-| Kind | How it decides |
-| --- | --- |
-| date | Most of the values look like dates |
-| number | Most of the values are numbers (it ignores $, %, and commas) |
-| category | Only a few different values, and they keep repeating |
-| text | Lots of different values or long text, like names or notes |
-| empty | The column has nothing in it |
+The project includes automated tests that use Python’s built-in `unittest` framework.
 
-Then, for the **freshness check**, it goes through each date column and tells
-you the oldest and newest dates, how many days have gone by since that newest
-one, an overall label (Fresh, Aging, or Old), and how many rows have slipped
-past the cutoff for old.
-
-And for the **list of categories**, it shows you each category column's values
-and how often each one turns up, points out any blank cells, and quietly
-groups together the values that are really the same once you stop caring about
-capital letters and stray spaces. That is how the mismatched spellings give
-themselves away.
-
-## The web version (no command line, promise)
-
-If typing commands is not your thing, the project includes a browser version
-anyone can use here: https://lindaxeva.github.io/sheetblix/. 
-
-One thing worth knowing: the web version does everything inside your own
-browser. Whatever file you open stays on your device and is never sent
-anywhere. No uploads, no servers, no funny business.
-
-## Dates it can read
-
-`YYYY-MM-DD`, `YYYY/MM/DD`, `DD-MM-YYYY`, `DD/MM/YYYY`, `MM/DD/YYYY`,
-`MM-DD-YYYY`, `YYYY-MM-DD HH:MM:SS`, ISO timestamps, `12 Jan 2026`,
-`January 12, 2026`, and `YYYYMMDD`.
-
-## Want to check if it really works?
-
-It comes with its own set of tests, and again, nothing to install. From the
-project folder, run:
+Run the tests from the repository folder:
 
 ```bash
 python3 -m unittest -v
 ```
 
-Every test should come back with `OK`. These same tests also run on their own
-over on GitHub every time you upload a change, and you will see a little
-checkmark on the project page when they pass.
+A successful test run should finish with:
 
-## Notice
+```text
+OK
+```
 
-- It works with CSV files, so save other formats (Google/Excel sheets) as CSV first.
-- It spots dates by their format, so a really unusual date style might get read
-  as plain text.
-- It catches spacing and capital-letter mismatches, but not typos or different
-  words for the same thing. It will not guess that "BC" and "British Columbia"
-  are the same place. 
+Testing covers areas such as:
 
-## License
+- CSV file reading
+- Row and column counts
+- Column-type identification
+- Date-format recognition
+- Oldest and newest date detection
+- Freshness calculations
+- Custom reference dates
+- Custom freshness thresholds
+- Stale-row counts
+- Categorical value counts
+- Category percentages
+- Missing-value detection
+- Capitalization variations
+- Spacing variations
+- Text output
+- Markdown output
+- JSON output
+- Freshness-only mode
+- Glossary-only mode
+- Invalid input and error handling
 
-MIT. See `LICENSE`.
+Sheetblix meets its acceptance criteria when:
+
+- A valid CSV can be analyzed.
+- The correct file name, row count, and column count are displayed.
+- Recognizable date columns are identified.
+- Oldest and newest dates are summarized correctly.
+- An overall freshness status is produced.
+- Stale rows are counted and displayed as a percentage.
+- Categorical columns are summarized.
+- Category values, counts, and percentages are displayed.
+- Missing categorical values are reported.
+- Possible capitalization and spacing variations are surfaced.
+- The original CSV remains unchanged.
+- Browser-selected files remain on the user’s device.
+- The Python version runs without third-party packages.
+- Automated tests complete successfully.
+
+Test outcomes depend on the supplied file and its formatting. Unusual dates, malformed CSV structures, or highly distinct columns may affect how information is classified.
+
+---
+
+## Value Delivered
+
+| Value | Outcome |
+|---|---|
+| **Efficiency** | Reduces the time spent manually inspecting CSV files. |
+| **Consistency** | Applies the same basic data-quality checks whenever a file is reviewed. |
+| **Visibility** | Makes outdated records, missing values, and category distributions easier to notice. |
+| **Clarity** | Presents file dimensions, counts, percentages, and statuses in an understandable format. |
+| **Reliability** | Helps users identify issues that may affect filters, summaries, charts, dashboards, and reports. |
+| **Accessibility** | Provides both browser-based and command-line ways to use the tool. |
+| **Privacy** | Keeps browser-selected files on the user’s device. |
+| **Transparency** | Reports findings without silently changing the original data. |
+| **Reusability** | Produces text, Markdown, and JSON reports that can support different workflows. |
+| **Maintainability** | Uses Python’s standard library without third-party package dependencies. |
+| **Human Oversight** | Leaves corrections and final data-quality decisions to the user. |
+
+---
+
+## Tools
+
+Python · HTML · CSS · JavaScript · CSV · JSON · Markdown · Git · GitHub · GitHub Pages · GitHub Actions
+
+---
+
+## Privacy
+
+Sheetblix is designed to minimize unnecessary data exposure.
+
+The command-line version processes files locally on the user’s computer. The browser version reads and analyzes the selected CSV inside the browser, so the file remains on the user’s device and is not intentionally uploaded to an external server.
+
+Sheetblix does not automatically modify the original file.
+
+Users should avoid including confidential, restricted, or personally identifiable information in public sample files, screenshots, repositories, documentation, or shared reports.
