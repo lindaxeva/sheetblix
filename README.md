@@ -1,6 +1,8 @@
 # Sheetblix
 
-Sheetblix turns your spreadsheet-style CSV file into a clear data-quality audit snapshot. It shows whether the data is current, what values appear in repeated-category columns, how frequently those values occur, and where missing or inconsistently entered information may require review.
+**Sheetblix turns your spreadsheet-style CSV file into a clear data-quality audit snapshot.** 
+
+It shows whether the data is current, what values appear in repeated-category columns, how frequently those values occur, and where missing or inconsistently entered information may require review.
 
 Sheetblix was developed for the **GLOCAL Foundation of Canada** to help volunteers, staff, researchers, and non-technical users reduce repetitive spreadsheet checks and identify outdated, missing, or inconsistently entered data before it affects summaries, dashboards, reports, or administrative work.
 
