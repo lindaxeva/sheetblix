@@ -57,7 +57,7 @@ Sheetblix supports human review. It identifies possible issues without automatic
 
 ## Project Objectives
 
-Sheetblix was designed to:
+Sheetblix will help you:
 
 - Reduce repetitive manual CSV inspection.
 - Provide an immediate summary of a file’s rows and columns.
