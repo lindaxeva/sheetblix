@@ -84,10 +84,9 @@ Sheetblix will help you:
 | Business Requirement | Reduce the time and effort required to perform routine data-quality checks on CSV files before they are used for reporting or analysis. |
 | Stakeholder Requirement | Allow non-technical users, researchers, and data volunteers to upload a CSV file and understand its condition without needing advanced technical knowledge. |
 | Functional Requirement | Analyze CSV files for structure, date freshness, stale records, categorical values, missing entries, and possible formatting inconsistencies. |
-| Usability Requirement | Provide both a visual browser application and a Python command-line interface. |
 | Non-Functional Requirement | Be easy to use, fast, readable, privacy-conscious, compatible with Python 3.8+, and built without external Python packages. |
 | Transition Requirement | Provide a README, usage instructions, sample CSV files, and deployment guidance so users can begin using the tool with minimal setup. |
-| Human-Review Requirement | Leave corrections and final data-quality decisions to the user. |
+| Usability Requirement | Provide both a visual browser application and a Python command-line interface. |
 
 ---
 
